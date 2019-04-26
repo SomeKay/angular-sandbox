@@ -2,6 +2,6 @@
 
 <ul>
     <li *ngFor="let pokemon of pokemonList">
-        <p>{{ pokemon.name }}</p>
+        <p [routerLink]="pokemon.name">{{ pokemon.name }}</p>
     </li>
 </ul>

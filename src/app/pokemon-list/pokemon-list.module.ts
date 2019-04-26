@@ -6,7 +6,7 @@ import { PokemonListComponent } from './containers/pokemon-list/pokemon-list.com
 import { PokemonListRoutingModule } from './pokemon-list.routing.module';
 import { DataEffects } from './state/effects/data.effects';
 import { reducers } from './state/reducers';
-import { PokemonListStateService } from './state/services/pokemon-list.service';
+import { PokemonListStateService } from './state/services/pokemon-list-state.service';
 
 @NgModule({
     declarations: [PokemonListComponent],
