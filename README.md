@@ -2,9 +2,9 @@
 
 An Angular playground for exploring different Angular ideas.
 
-Built using the free [Pokemon API](https://karma-runner.github.io), it is
-deployed [here on GitHub Pages](https://poslek.com/angular-sandbox/) where you
-can try it out.
+Built using the free [Pokemon API](https://pokeapi.co), it is deployed
+[here on GitHub Pages](https://poslek.com/angular-sandbox/) where you can try it
+out.
 
 ## Development server
 
