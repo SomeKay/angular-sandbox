@@ -10,8 +10,8 @@ import * as dataReducers from '../reducers/data.reducers';
 export class PokemonListStateService {
     constructor(private store: Store<pokemonListReducers.State>) {}
 
-    fetchPokemonList(): void {
-        this.store.dispatch(new dataActions.FetchPokemonList());
+    fetchPokemonList(url?: string): void {
+        this.store.dispatch(new dataActions.FetchPokemonList(url));
     }
 
     getDataState(): Observable<dataReducers.State> {

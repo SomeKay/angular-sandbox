@@ -32,8 +32,8 @@ export class PokemonListComponent implements OnInit, OnDestroy {
         this.sharedStateService.addLoading();
     }
 
-    fetchPokemonList() {
-        this.pokemonListStateService.fetchPokemonList();
+    fetchPokemonList(url?: string) {
+        this.pokemonListStateService.fetchPokemonList(url);
     }
 
     ngOnDestroy() {

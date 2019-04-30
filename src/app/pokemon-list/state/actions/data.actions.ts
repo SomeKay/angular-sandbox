@@ -4,11 +4,13 @@ import { PokemonListResponse } from '../../../shared/models/pokemon-list-respons
 export enum DataActionTypes {
     FETCH_POKEMON_LIST = '[LIST] Fetch Pokemon list',
     FETCH_POKEMON_LIST_SUCCESS = '[LIST] Fetch Pokemon list success',
-    FETCH_POKEMON_LIST_ERROR = '[LIST] Fetch Pokemon list error',
+    FETCH_POKEMON_LIST_ERROR = '[LIST] Fetch Pokemon list error'
 }
 
 export class FetchPokemonList implements Action {
     readonly type = DataActionTypes.FETCH_POKEMON_LIST;
+
+    constructor(public payload?: string) {}
 }
 
 export class FetchPokemonListSuccess implements Action {

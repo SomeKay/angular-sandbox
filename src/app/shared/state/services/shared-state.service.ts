@@ -7,23 +7,23 @@ import * as sharedReducers from '../reducers';
 import * as layoutReducers from '../reducers/layout.reducers';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SharedStateService {
-  constructor(private store: Store<sharedReducers.State>) {}
+    constructor(private store: Store<sharedReducers.State>) {}
 
-  addLoading(): void {
-    this.store.dispatch(new layoutActions.AddLoading());
-  }
+    addLoading(): void {
+        this.store.dispatch(new layoutActions.AddLoading());
+    }
 
-  removeLoading(): void {
-    this.store.dispatch(new layoutActions.RemoveLoading());
-  }
+    removeLoading(): void {
+        this.store.dispatch(new layoutActions.RemoveLoading());
+    }
 
-  getLayoutState(): Observable<layoutReducers.State> {
-    return this.store.pipe(
-      select(sharedReducers.getSharedState),
-      map(shared => shared.layout)
-    );
-  }
+    getLayoutState(): Observable<layoutReducers.State> {
+        return this.store.pipe(
+            select(sharedReducers.getSharedState),
+            map(shared => shared.layout)
+        );
+    }
 }

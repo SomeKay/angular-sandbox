@@ -1,5 +1,19 @@
-<h1 routerLink="/">Gotta catch 'em all</h1>
+<section class="hero is-warning">
+    <div class="hero-head">
+        <nav class="navbar"></nav>
+    </div>
 
-<pkmn-loader></pkmn-loader>
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title"><a routerLink="/">Gotta catch 'em all</a></h1>
+            <h2 class="subtitle">Pokemon!</h2>
+        </div>
+    </div>
+</section>
 
-<router-outlet></router-outlet>
+<section>
+    <div class="container">
+        <pkmn-loader></pkmn-loader>
+        <router-outlet></router-outlet>
+    </div>
+</section>

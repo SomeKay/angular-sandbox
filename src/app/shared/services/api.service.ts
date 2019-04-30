@@ -10,8 +10,12 @@ export class ApiService {
 
     constructor(private http: HttpClient) {}
 
-    getPokemonList(): Observable<HttpResponse<PokemonListResponse>> {
-        const url = `${this.apiPrefix}/pokemon`;
+    getPokemonList(
+        url?: string
+    ): Observable<HttpResponse<PokemonListResponse>> {
+        if (!url) {
+            url = `${this.apiPrefix}/pokemon`;
+        }
 
         return this.http.get<PokemonListResponse>(url, { observe: 'response' });
     }

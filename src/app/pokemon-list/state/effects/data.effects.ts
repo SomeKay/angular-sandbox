@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { RemoveLoading } from 'src/app/shared/state/actions/layout.actions';
 import {
     DataActionTypes,
+    FetchPokemonList,
     FetchPokemonListError,
     FetchPokemonListSuccess
 } from '../actions/data.actions';
@@ -18,8 +19,8 @@ export class DataEffects {
     @Effect()
     fetchPokemonList$: Observable<Action> = this.actions$.pipe(
         ofType(DataActionTypes.FETCH_POKEMON_LIST),
-        mergeMap(() =>
-            this.apiService.getPokemonList().pipe(
+        mergeMap((action: FetchPokemonList) => {
+            return this.apiService.getPokemonList(action.payload).pipe(
                 switchMap(data => [
                     new FetchPokemonListSuccess(data.body),
                     new RemoveLoading()
@@ -29,7 +30,7 @@ export class DataEffects {
 
                     return [new FetchPokemonListError(), new RemoveLoading()];
                 })
-            )
-        )
+            );
+        })
     );
 }
