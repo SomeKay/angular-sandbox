@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pokemonList.ListPagingComponent should have a snapshot 1`] = `
+<pkmn-list-paging
+  nextUrl={[Function String]}
+  paging={[Function EventEmitter]}
+  previousUrl={[Function String]}
+>
+  <nav
+    class="level"
+  >
+    <div
+      class="level-left"
+    >
+      <div
+        class="level-item"
+      >
+        
+      </div>
+    </div>
+    <div
+      class="level-right"
+    >
+      <p
+        class="level-item"
+      >
+        
+      </p>
+    </div>
+  </nav>
+</pkmn-list-paging>
+`;

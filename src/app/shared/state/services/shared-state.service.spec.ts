@@ -3,28 +3,30 @@ import { storeMock } from '../store.mock';
 import { SharedStateService } from './shared-state.service';
 
 describe('shared.SharedStateService', () => {
-    let sharedStateService: SharedStateService;
+    let testee: SharedStateService;
 
     beforeEach(() => {
-        sharedStateService = new SharedStateService(storeMock);
+        testee = new SharedStateService(storeMock);
     });
 
     it('should dispatch AddLoading action', () => {
         const action = new AddLoading();
-        sharedStateService.addLoading();
+        storeMock.dispatch = jest.fn();
+        testee.addLoading();
 
         expect(storeMock.dispatch).toHaveBeenCalledWith(action);
     });
 
     it('should dispatch RemoveLoading action', () => {
         const action = new RemoveLoading();
-        sharedStateService.removeLoading();
+        storeMock.dispatch = jest.fn();
+        testee.removeLoading();
 
         expect(storeMock.dispatch).toHaveBeenCalledWith(action);
     });
 
     it('should provide the layout part of the state', () => {
         storeMock.pipe = jest.fn().mockReturnValue('foo');
-        expect(sharedStateService.getLayoutState()).toEqual('foo');
+        expect(testee.getLayoutState()).toEqual('foo');
     });
 });

@@ -1,11 +1,7 @@
-import { Pokemon } from 'src/app/shared/models/pokemon';
+import { PokemonListData } from '../../models/pokemon-list-data';
 import { DataActions, DataActionTypes } from '../actions/data.actions';
 
-export interface State {
-    pokemonList: Array<Pokemon>;
-    nextUrl: string;
-    previousUrl: string;
-}
+export type State = PokemonListData;
 
 export const initialState: State = {
     pokemonList: [],
@@ -19,10 +15,12 @@ export function reducer(
 ): State {
     switch (action.type) {
         case DataActionTypes.FETCH_POKEMON_LIST_SUCCESS: {
+            const { results, next, previous } = action.payload;
+
             return {
-                pokemonList: action.payload.results,
-                nextUrl: action.payload.next,
-                previousUrl: action.payload.previous
+                pokemonList: results,
+                nextUrl: next,
+                previousUrl: previous
             };
         }
 
