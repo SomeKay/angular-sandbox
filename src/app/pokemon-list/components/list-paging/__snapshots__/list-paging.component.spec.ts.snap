@@ -16,6 +16,11 @@ exports[`pokemonList.ListPagingComponent should have a snapshot 1`] = `
         class="level-item"
       >
         
+        <button
+          class="button is-primary"
+        >
+           Previous 
+        </button>
       </div>
     </div>
     <div
@@ -25,6 +30,11 @@ exports[`pokemonList.ListPagingComponent should have a snapshot 1`] = `
         class="level-item"
       >
         
+        <button
+          class="button is-primary"
+        >
+           Next 
+        </button>
       </p>
     </div>
   </nav>

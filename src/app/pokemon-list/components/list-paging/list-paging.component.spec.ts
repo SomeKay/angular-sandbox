@@ -18,6 +18,8 @@ describe('pokemonList.ListPagingComponent', () => {
         testee.nextUrl = 'foo';
         testee.previousUrl = 'bar';
 
+        fixture.detectChanges();
+
         expect(fixture).toMatchSnapshot();
     });
 

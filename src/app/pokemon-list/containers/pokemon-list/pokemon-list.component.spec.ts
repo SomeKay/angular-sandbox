@@ -52,6 +52,11 @@ describe('pokemonList.PokemonListComponent', () => {
             );
         });
 
+        it('should have a working snapshot', () => {
+            fixture.detectChanges();
+            expect(fixture).toMatchSnapshot();
+        });
+
         it('should trigger pokemon list fetching', () => {
             testee.ngOnInit();
 

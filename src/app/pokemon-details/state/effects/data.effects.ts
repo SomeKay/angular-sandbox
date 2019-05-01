@@ -25,9 +25,7 @@ export class DataEffects {
                     new FetchPokemonDetailsSuccess(data.body),
                     new RemoveLoading()
                 ]),
-                catchError(httpErrorResponse => {
-                    console.log(httpErrorResponse);
-
+                catchError(() => {
                     return [
                         new FetchPokemonDetailsError(),
                         new RemoveLoading()

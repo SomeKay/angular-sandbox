@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pokemonList.PokemonListComponent on component init should have a working snapshot 1`] = `
+<pkmn-list
+  fetchPokemonList={[Function Function]}
+  nextUrl=""
+  pokemonListStateService={[Function PokemonListStateServiceMock]}
+  previousUrl=""
+  sharedStateService={[Function SharedStateServiceMock]}
+  subscriptions={[Function Subscription]}
+>
+  <div
+    class="section"
+  >
+    <h2
+      class="title is-1"
+    >
+      Pokemon list
+    </h2>
+    <div
+      class="columns is-multiline"
+    >
+      
+    </div>
+    <pkmn-list-paging
+      ng-reflect-next-url=""
+      ng-reflect-previous-url=""
+    >
+      ./list-paging.component.html
+    </pkmn-list-paging>
+  </div>
+</pkmn-list>
+`;
