@@ -32,7 +32,7 @@ jobs:
             - run:
                   name: Building
                   command: |
-                      elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+                      if [ "${CIRCLE_BRANCH}" == "master" ]; then
                           npm run build:prodGithub
                       else
                           npm run build
