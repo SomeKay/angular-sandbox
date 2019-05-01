@@ -1,6 +1,32 @@
-<h2>Pokemon details</h2>
-<div *ngIf="pokemon">
-    <img [src]="pokemon.sprites.frontDefault" [alt]="pokemon.name" />
-    <p>Name: {{ pokemon.name }}</p>
-    <p>Weight: {{ pokemon.weight }}</p>
+<div class="section">
+    <h2 class="title is-1">Pokemon details</h2>
+
+    <div *ngIf="pokemon">
+        <div class="columns">
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img
+                                [src]="pokemon.sprites.frontDefault"
+                                [alt]="pokemon.name"
+                            />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">
+                                    {{ pokemon.name }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <h3 class="title is-4">Weight: {{ pokemon.weight }}</h3>
+            </div>
+        </div>
+    </div>
 </div>
