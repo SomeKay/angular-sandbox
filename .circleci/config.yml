@@ -5,13 +5,16 @@ jobs:
         working_directory: ~/project
         environment:
             BRANCH: gh-pages
+        branches:
+            only:
+                - master
         docker:
             - image: circleci/node:10.13
         steps:
             - checkout
             - run:
                   name: Show current branch
-                  command: echo ${CIRCLE_BRANCH}
+                  command: echo "Build started on branch ${CIRCLE_BRANCH}"
             - restore_cache:
                   keys:
                       - v1-dependencies-{{ checksum "package.json" }}
@@ -37,21 +40,11 @@ jobs:
                       else
                           npm run build
                       fi
-            - save_cache:
-                  key:
-                      v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{
-                      .Environment.CIRCLE_SHA1 }}
-                  paths:
-                      - dist
-            - restore_cache:
-                  key:
-                      v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{
-                      .Environment.CIRCLE_SHA1 }}
             - run:
                   name: Deploy to GitHub Pages
                   command: |
                       if [ "${CIRCLE_BRANCH}" = "master" ]; then
-                        echo -e "GitHub Pages deployment"
+                        echo "GitHub Pages deployment"
                         cd ~/project
                         git config --global user.email "builds@circleci.com"
                         git config --global user.name "CircleCI"
