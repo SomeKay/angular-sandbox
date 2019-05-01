@@ -55,7 +55,7 @@ jobs:
                         cd ~/project
                         git config --global user.email "builds@circleci.com"
                         git config --global user.name "CircleCI"
-                        git clone --quiet --branch=$BRANCH https://${GH_TOKEN}@github.com/angular-sandbox.git built_website > /dev/null
+                        git clone --quiet --branch=$BRANCH https://${GH_TOKEN}@github.com/bojzi/angular-sandbox.git built_website > /dev/null
 
                         echo "Installing rsync"
                         sudo apt-get -y install rsync
