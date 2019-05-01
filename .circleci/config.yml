@@ -3,6 +3,8 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/project
+        environment:
+            BRANCH: gh-pages
         docker:
             - image: circleci/node:10.13
         steps:
@@ -41,17 +43,6 @@ jobs:
                       .Environment.CIRCLE_SHA1 }}
                   paths:
                       - dist
-
-    deploy:
-        working_directory: ~/project
-        environment:
-            BRANCH: gh-pages
-        docker:
-            - image: circleci/node:10.13
-        steps:
-            - run:
-                  name: Show current branch
-                  command: echo ${CIRCLE_BRANCH}
             - restore_cache:
                   key:
                       v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{
@@ -86,9 +77,3 @@ jobs:
                         else
                         echo "Not master branch, dry run only"
                       fi
-
-workflows:
-    build_and_deploy:
-        jobs:
-            - build
-            - deploy
