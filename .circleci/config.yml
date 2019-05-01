@@ -29,7 +29,12 @@ jobs:
                   command: npm run test
             - run:
                   name: Building
-                  command: npm run build:prodGithub
+                  command: |
+                      elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+                          npm run build:prodGithub
+                      else
+                          npm run build
+                      fi
             - save_cache:
                   key:
                       v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{
@@ -37,7 +42,53 @@ jobs:
                   paths:
                       - dist
 
+    deploy:
+        working_directory: ~/project
+        environment:
+            BRANCH: gh-pages
+        docker:
+            - image: circleci/node:10.13
+        steps:
+            - run:
+                  name: Show current branch
+                  command: echo ${CIRCLE_BRANCH}
+            - restore_cache:
+                  key:
+                      v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{
+                      .Environment.CIRCLE_SHA1 }}
+            - run:
+                  name: Deploy to GitHub Pages
+                  command: |
+                      if [ "${CIRCLE_BRANCH}" = "master" ]; then
+                        echo -e "GitHub Pages deployment"
+                        cd ~/project
+                        git config --global user.email "builds@circleci.com"
+                        git config --global user.name "CircleCI"
+                        git clone --quiet --branch=$BRANCH https://${GH_TOKEN}@github.com/angular-sandbox.git built_website > /dev/null
+
+                        echo "Installing rsync"
+                        sudo apt-get -y install rsync
+
+                        echo "Copy dist to built_website"
+                        cd built_website
+                        rsync -r --exclude=.git --delete ../dist/ ./
+
+                        echo "Staging files"
+                        git add -f .
+                        echo "Commiting files"
+                        if git commit -m "CircleCI build $CIRCLE_BUILD_NUM pushed to Github Pages" ; then
+                            echo "Force pushing files"
+                            git push -fq origin $BRANCH > /dev/null
+                            echo -e "Deploy completed"
+                        else
+                            echo "Content not changed, nothing to deploy"
+                      fi
+                        else
+                        echo "Not master branch, dry run only"
+                      fi
+
 workflows:
     build_and_deploy:
         jobs:
             - build
+            - deploy
