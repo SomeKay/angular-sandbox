@@ -62,7 +62,7 @@ jobs:
 
                         echo "Copy dist to built_website"
                         cd built_website
-                        rsync -r --exclude=.git --delete ../dist/ ./
+                        rsync -r --exclude=.git --delete ../dist/angular-sandbox/ ./
 
                         echo "Staging files"
                         git add -f .
