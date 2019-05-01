@@ -6,7 +6,7 @@ import { DataEffects } from 'src/app/pokemon-list/state/effects/data.effects';
 import { PokemonListResponse } from 'src/app/shared/models/pokemon-list-response';
 import { pokemonListResponseMock } from 'src/app/shared/models/pokemon-list-response.mock';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { ApiServiceMock } from 'src/app/shared/services/api.service.mock';
+import { MockApiService } from 'src/app/shared/services/api.service.mock';
 import {
     LayoutActionTypes,
     RemoveLoading
@@ -30,7 +30,7 @@ describe('state.tree.effects.TreeEffects', () => {
             providers: [
                 {
                     provide: ApiService,
-                    useClass: ApiServiceMock
+                    useClass: MockApiService
                 },
                 DataEffects,
                 provideMockActions(() => actions)

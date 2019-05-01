@@ -1,6 +1,6 @@
 {
     "name": "angular-sandbox",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -8,6 +8,8 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:watchAll": "jest --watchAll",
+        "pre-commit": "npm prettier && npm lint && npm test",
+        "prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,ts,json,html}\"",
         "lint": "ng lint",
         "e2e": "ng e2e"
     },
@@ -37,12 +39,16 @@
         "@types/jest": "^24.0.12",
         "@types/node": "~8.9.4",
         "codelyzer": "~4.5.0",
+        "husky": "^2.1.0",
         "jasmine-core": "~2.99.1",
         "jasmine-spec-reporter": "~4.2.1",
         "jest": "^24.7.1",
         "jest-preset-angular": "^7.1.0",
+        "prettier": "^1.17.0",
+        "pretty-quick": "^1.10.0",
         "ts-node": "~7.0.0",
         "tslint": "~5.11.0",
+        "tslint-config-prettier": "^1.18.0",
         "typescript": "~3.2.2"
     },
     "jest": {
@@ -53,5 +59,10 @@
         "transformIgnorePatterns": [
             "node_modules/(?!@ngrx)"
         ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
     }
 }

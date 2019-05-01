@@ -6,7 +6,7 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<State> = {
-    data: dataReducers.reducer,
+    data: dataReducers.reducer
 };
 
 export const getPokemonListState = createFeatureSelector<State>('pokemonList');

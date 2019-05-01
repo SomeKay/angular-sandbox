@@ -1,4 +1,4 @@
-export class PokemonListStateServiceMock {
+export class MockPokemonListStateService {
     fetchPokemonList = jest.fn();
     getDataState = jest.fn();
 }

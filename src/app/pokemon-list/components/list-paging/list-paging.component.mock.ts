@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     selector: 'pkmn-list-paging',
     template: './list-paging.component.html'
 })
-export class ListPagingComponentMock {
+export class MockListPagingComponent {
     @Input()
     previousUrl: string;
 

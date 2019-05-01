@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of as observableOf, Subject } from 'rxjs';
 import { SharedStateService } from 'src/app/shared/state/services/shared-state.service';
-import { SharedStateServiceMock } from 'src/app/shared/state/services/shared-state.service.mock';
-import { ListPagingComponentMock } from '../../components/list-paging/list-paging.component.mock';
+import { MockSharedStateService } from 'src/app/shared/state/services/shared-state.service.mock';
+import { MockListPagingComponent } from '../../components/list-paging/list-paging.component.mock';
 import { pokemonListDataMock } from '../../models/pokemon-list-data.mock';
 import { PokemonListStateService } from '../../state/services/pokemon-list-state.service';
-import { PokemonListStateServiceMock } from '../../state/services/pokemon-list-state.service.mock';
+import { MockPokemonListStateService } from '../../state/services/pokemon-list-state.service.mock';
 import { PokemonListComponent } from './pokemon-list.component';
 
 describe('pokemonList.PokemonListComponent', () => {
@@ -19,15 +19,15 @@ describe('pokemonList.PokemonListComponent', () => {
 
     beforeEach(async () => {
         TestBed.configureTestingModule({
-            declarations: [PokemonListComponent, ListPagingComponentMock],
+            declarations: [PokemonListComponent, MockListPagingComponent],
             providers: [
                 {
                     provide: PokemonListStateService,
-                    useClass: PokemonListStateServiceMock
+                    useClass: MockPokemonListStateService
                 },
                 {
                     provide: SharedStateService,
-                    useClass: SharedStateServiceMock
+                    useClass: MockSharedStateService
                 }
             ],
             imports: [RouterTestingModule]

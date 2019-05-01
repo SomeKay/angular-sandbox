@@ -4,9 +4,9 @@ exports[`pokemonList.PokemonListComponent on component init should have a workin
 <pkmn-list
   fetchPokemonList={[Function Function]}
   nextUrl=""
-  pokemonListStateService={[Function PokemonListStateServiceMock]}
+  pokemonListStateService={[Function MockPokemonListStateService]}
   previousUrl=""
-  sharedStateService={[Function SharedStateServiceMock]}
+  sharedStateService={[Function MockSharedStateService]}
   subscriptions={[Function Subscription]}
 >
   <div

@@ -3,7 +3,7 @@ import { SharedStateService } from 'src/app/shared/state/services/shared-state.s
 
 @Component({
     selector: 'pkmn-loader',
-    templateUrl: './loader.component.html',
+    templateUrl: './loader.component.html'
 })
 export class LoaderComponent implements OnInit {
     loading: number;
