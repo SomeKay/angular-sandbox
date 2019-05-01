@@ -6,6 +6,8 @@ Built using the free [Pokemon API](https://pokeapi.co), it is deployed
 [here on GitHub Pages](https://poslek.com/angular-sandbox/) where you can try it
 out.
 
+[![CircleCI](https://circleci.com/gh/bojzi/angular-sandbox/tree/master.svg?style=svg)](https://circleci.com/gh/bojzi/angular-sandbox/tree/master)
+
 ## Installing
 
 Run `npm install`.
