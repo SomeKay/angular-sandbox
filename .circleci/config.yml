@@ -6,8 +6,8 @@ jobs:
         environment:
             BRANCH: gh-pages
         branches:
-            only:
-                - master
+            ignore:
+                - gh-pages
         docker:
             - image: circleci/node:10.13
         steps:
@@ -38,7 +38,7 @@ jobs:
                       if [ "${CIRCLE_BRANCH}" == "master" ]; then
                           npm run build:prodGithub
                       else
-                          npm run build
+                          npm run build:prod
                       fi
             - run:
                   name: Deploy to GitHub Pages
