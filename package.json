@@ -13,8 +13,7 @@
         "pre-commit": "npm run prettier:quick && npm run lint && npm run test",
         "prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,ts,json,html}\"",
         "prettier:quick": "pretty-quick --staged",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
+        "lint": "ng lint"
     },
     "private": true,
     "dependencies": {
