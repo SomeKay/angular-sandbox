@@ -1,4 +1,4 @@
-import { pokemonResponseMock1 } from 'src/app/shared/models/pokemon-response.mock';
+import { pokemonResponseMock1 } from 'src/app/shared/models/api/pokemon-response.mock';
 import { FetchPokemonDetailsSuccess } from '../actions/data.actions';
 import * as dataReducers from './data.reducers';
 
@@ -14,10 +14,36 @@ describe('pokemonDetails.DataReducers', () => {
         const state = dataReducers.reducer(dataReducers.initialState, action);
 
         expect(state.pokemon).toEqual({
-            ...pokemonResponseMock1,
+            name: pokemonResponseMock1.name,
+            height: pokemonResponseMock1.height,
+            weight: pokemonResponseMock1.weight,
+            id: pokemonResponseMock1.id,
+            order: pokemonResponseMock1.order,
             sprites: {
-                frontDefault: pokemonResponseMock1.sprites.front_default
-            }
+                frontDefault: pokemonResponseMock1.sprites.front_default,
+                frontShiny: pokemonResponseMock1.sprites.front_shiny,
+                backDefault: pokemonResponseMock1.sprites.back_default,
+                backShiny: pokemonResponseMock1.sprites.back_shiny
+            },
+            baseExperience: pokemonResponseMock1.base_experience,
+            isDefault: pokemonResponseMock1.is_default,
+            abilities: pokemonResponseMock1.abilities.map(a => ({
+                name: a.ability.name,
+                url: a.ability.url,
+                slot: a.slot,
+                isHidden: a.is_hidden
+            })),
+            types: pokemonResponseMock1.types.map(t => ({
+                name: t.type.name,
+                url: t.type.url,
+                slot: t.slot
+            })),
+            stats: pokemonResponseMock1.stats.map(s => ({
+                name: s.stat.name,
+                url: s.stat.url,
+                baseStat: s.base_stat,
+                effort: s.effort
+            }))
         });
     });
 

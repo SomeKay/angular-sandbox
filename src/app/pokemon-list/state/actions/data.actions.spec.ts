@@ -1,4 +1,4 @@
-import { pokemonListResponseMock } from 'src/app/shared/models/pokemon-list-response.mock';
+import { pokemonListResponseMock } from 'src/app/shared/models/api/pokemon-list-response.mock';
 import {
     DataActionTypes,
     FetchPokemonList,

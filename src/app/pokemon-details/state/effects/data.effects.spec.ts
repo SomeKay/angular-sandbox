@@ -2,8 +2,8 @@ import { HttpResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { of, ReplaySubject, throwError as _throw } from 'rxjs';
-import { PokemonResponse } from 'src/app/shared/models/pokemon-response';
-import { pokemonResponseMock1 } from 'src/app/shared/models/pokemon-response.mock';
+import { PokemonResponse } from 'src/app/shared/models/api/pokemon-response';
+import { pokemonResponseMock1 } from 'src/app/shared/models/api/pokemon-response.mock';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MockApiService } from 'src/app/shared/services/api.service.mock';
 import {

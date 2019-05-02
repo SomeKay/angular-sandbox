@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { of, ReplaySubject, throwError as _throw } from 'rxjs';
 import { DataEffects } from 'src/app/pokemon-list/state/effects/data.effects';
-import { PokemonListResponse } from 'src/app/shared/models/pokemon-list-response';
-import { pokemonListResponseMock } from 'src/app/shared/models/pokemon-list-response.mock';
+import { PokemonListResponse } from 'src/app/shared/models/api/pokemon-list-response';
+import { pokemonListResponseMock } from 'src/app/shared/models/api/pokemon-list-response.mock';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MockApiService } from 'src/app/shared/services/api.service.mock';
 import {
