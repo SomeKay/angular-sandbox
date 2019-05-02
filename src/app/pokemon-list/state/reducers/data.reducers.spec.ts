@@ -15,7 +15,9 @@ describe('pokemonList.DataReducers', () => {
         const action = new FetchPokemonListSuccess(pokemonListResponseMock);
         const state = dataReducers.reducer(dataReducers.initialState, action);
 
-        expect(state.pokemonList).toBe(pokemonListResponseMock.results);
+        expect(state.pokemonList).toEqual(
+            pokemonListResponseMock.results.map(p => ({ name: p.name }))
+        );
         expect(state.nextUrl).toBe(pokemonListResponseMock.next);
         expect(state.previousUrl).toBe(pokemonListResponseMock.previous);
     });

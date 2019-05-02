@@ -2,9 +2,8 @@ import { HttpResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { of, ReplaySubject, throwError as _throw } from 'rxjs';
-import { DataEffects } from 'src/app/pokemon-list/state/effects/data.effects';
-import { PokemonListResponse } from 'src/app/shared/models/pokemon-list-response';
-import { pokemonListResponseMock } from 'src/app/shared/models/pokemon-list-response.mock';
+import { PokemonResponse } from 'src/app/shared/models/pokemon-response';
+import { pokemonResponseMock1 } from 'src/app/shared/models/pokemon-response.mock';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MockApiService } from 'src/app/shared/services/api.service.mock';
 import {
@@ -13,12 +12,13 @@ import {
 } from 'src/app/shared/state/actions/layout.actions';
 import {
     DataActionTypes,
-    FetchPokemonList,
-    FetchPokemonListError,
-    FetchPokemonListSuccess
+    FetchPokemonDetails,
+    FetchPokemonDetailsError,
+    FetchPokemonDetailsSuccess
 } from '../actions/data.actions';
+import { DataEffects } from './data.effects';
 
-describe('pokemonList.DataEffects', () => {
+describe('pokemonDetails.DataEffects', () => {
     let testee: DataEffects;
     let actions: ReplaySubject<any>;
     let apiServiceMock: ApiService;
@@ -43,21 +43,21 @@ describe('pokemonList.DataEffects', () => {
         called = 0;
     });
 
-    it('should handle the fetch pokemon list action', done => {
-        apiServiceMock.getPokemonList = jest.fn(() => {
-            const response = { body: pokemonListResponseMock } as HttpResponse<
-                PokemonListResponse
+    it('should handle the fetch pokemon details action', done => {
+        apiServiceMock.getPokemonDetails = jest.fn(() => {
+            const response = { body: pokemonResponseMock1 } as HttpResponse<
+                PokemonResponse
             >;
             return of(response);
         });
 
-        testee.fetchPokemonList$.subscribe(
-            (result: FetchPokemonListSuccess | RemoveLoading) => {
-                if (result instanceof FetchPokemonListSuccess) {
+        testee.fetchPokemonDetails$.subscribe(
+            (result: FetchPokemonDetailsSuccess | RemoveLoading) => {
+                if (result instanceof FetchPokemonDetailsSuccess) {
                     expect(result.type).toEqual(
-                        DataActionTypes.FETCH_POKEMON_LIST_SUCCESS
+                        DataActionTypes.FETCH_POKEMON_DETAILS_SUCCESS
                     );
-                    expect(result.payload).toEqual(pokemonListResponseMock);
+                    expect(result.payload).toEqual(pokemonResponseMock1);
 
                     called += 1;
                 }
@@ -76,19 +76,19 @@ describe('pokemonList.DataEffects', () => {
             }
         );
 
-        actions.next(new FetchPokemonList());
+        actions.next(new FetchPokemonDetails('foo'));
     });
 
-    it('should handle the fetch pokemon list error case', done => {
-        apiServiceMock.getPokemonList = jest.fn(() => {
+    it('should handle the fetch pokemon details error case', done => {
+        apiServiceMock.getPokemonDetails = jest.fn(() => {
             return _throw({ status: 500 });
         });
 
-        testee.fetchPokemonList$.subscribe(
-            (result: FetchPokemonListError | RemoveLoading) => {
-                if (result instanceof FetchPokemonListError) {
+        testee.fetchPokemonDetails$.subscribe(
+            (result: FetchPokemonDetailsError | RemoveLoading) => {
+                if (result instanceof FetchPokemonDetailsError) {
                     expect(result.type).toEqual(
-                        DataActionTypes.FETCH_POKEMON_LIST_ERROR
+                        DataActionTypes.FETCH_POKEMON_DETAILS_ERROR
                     );
 
                     called += 1;
@@ -108,6 +108,6 @@ describe('pokemonList.DataEffects', () => {
             }
         );
 
-        actions.next(new FetchPokemonList());
+        actions.next(new FetchPokemonDetails('foo'));
     });
 });

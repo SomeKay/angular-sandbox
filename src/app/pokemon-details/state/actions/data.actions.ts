@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Pokemon } from 'src/app/shared/models/pokemon';
+import { PokemonResponse } from 'src/app/shared/models/pokemon-response';
 
 export enum DataActionTypes {
     FETCH_POKEMON_DETAILS = '[DETAILS] Fetch Pokemon details',
@@ -16,7 +16,7 @@ export class FetchPokemonDetails implements Action {
 export class FetchPokemonDetailsSuccess implements Action {
     readonly type = DataActionTypes.FETCH_POKEMON_DETAILS_SUCCESS;
 
-    constructor(public payload: Pokemon) {}
+    constructor(public payload: PokemonResponse) {}
 }
 
 export class FetchPokemonDetailsError implements Action {

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pokemonDetails.PokemonDetailsComponent on component init should have a working snapshot 1`] = `
+<pkmn-details
+  name={[Function String]}
+  pokemonDetailsStateService={[Function MockPokemonDetailsStateService]}
+  route={[Function Object]}
+  sharedStateService={[Function MockSharedStateService]}
+  subscriptions={[Function Subscription]}
+>
+  <div
+    class="section"
+  >
+    <h2
+      class="title is-1"
+    >
+      Pokemon details
+    </h2>
+    
+  </div>
+</pkmn-details>
+`;

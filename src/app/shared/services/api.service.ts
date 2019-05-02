@@ -1,8 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Pokemon } from '../models/pokemon';
 import { PokemonListResponse } from '../models/pokemon-list-response';
+import { PokemonResponse } from '../models/pokemon-response';
 
 @Injectable()
 export class ApiService {
@@ -20,9 +20,9 @@ export class ApiService {
         return this.http.get<PokemonListResponse>(url, { observe: 'response' });
     }
 
-    getPokemonDetails(name: string): Observable<HttpResponse<Pokemon>> {
+    getPokemonDetails(name: string): Observable<HttpResponse<PokemonResponse>> {
         const url = `${this.apiPrefix}/pokemon/${name}`;
 
-        return this.http.get<Pokemon>(url, { observe: 'response' });
+        return this.http.get<PokemonResponse>(url, { observe: 'response' });
     }
 }

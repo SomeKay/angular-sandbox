@@ -1,8 +1,8 @@
 import { PokemonSprites } from './pokemon-sprites';
 
 export interface Pokemon {
-    id: number;
+    id?: number;
     name: string;
-    sprites: PokemonSprites;
-    weight: number;
+    sprites?: PokemonSprites;
+    weight?: number;
 }

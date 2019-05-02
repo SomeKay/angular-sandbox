@@ -1,4 +1,4 @@
-import { PokemonSprites } from './pokemon-sprites';
+import { Pokemon } from './pokemon';
 import { pokemonSpritesMock } from './pokemon-sprites.mock';
 
 export const pokemonMock1: Pokemon = {
@@ -14,10 +14,3 @@ export const pokemonMock2: Pokemon = {
     sprites: pokemonSpritesMock,
     weight: 400
 };
-
-export interface Pokemon {
-    id: number;
-    name: string;
-    sprites: PokemonSprites;
-    weight: number;
-}
