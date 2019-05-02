@@ -18,7 +18,7 @@ export function reducer(
             const { results, next, previous } = action.payload;
 
             return {
-                pokemonList: results,
+                pokemonList: results.map(pokemon => ({ name: pokemon.name })),
                 nextUrl: next,
                 previousUrl: previous
             };

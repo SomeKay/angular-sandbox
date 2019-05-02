@@ -14,7 +14,7 @@ describe('pokemonList.PokemonListStateService', () => {
         storeMock.dispatch = jest.fn();
         testee.fetchPokemonList();
 
-        expect(storeMock.dispatch).toHaveBeenNthCalledWith(1, action);
+        expect(storeMock.dispatch).toHaveBeenCalledWith(action);
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
     });
 

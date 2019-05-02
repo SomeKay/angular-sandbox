@@ -1,8 +1,11 @@
 import { PokemonListResponse } from './pokemon-list-response';
-import { pokemonMock1, pokemonMock2 } from './pokemon.mock';
+import {
+    pokemonResponseMock1,
+    pokemonResponseMock2
+} from './pokemon-response.mock';
 
 export const pokemonListResponseMock: PokemonListResponse = {
-    results: [pokemonMock1, pokemonMock2],
+    results: [pokemonResponseMock1, pokemonResponseMock2],
     count: 2,
     previous: 'previousFoo',
     next: 'nextFoo'

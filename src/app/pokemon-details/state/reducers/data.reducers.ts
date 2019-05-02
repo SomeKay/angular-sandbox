@@ -1,12 +1,10 @@
-import { Pokemon } from 'src/app/shared/models/pokemon';
+import { PokemonDetailsData } from '../../models/pokemon-details-data';
 import { DataActions, DataActionTypes } from '../actions/data.actions';
 
-export interface State {
-    pokemon: Pokemon;
-}
+export type State = PokemonDetailsData;
 
 export const initialState: State = {
-    pokemon: null
+    pokemon: undefined
 };
 
 export function reducer(
@@ -16,7 +14,7 @@ export function reducer(
     switch (action.type) {
         case DataActionTypes.FETCH_POKEMON_DETAILS: {
             return {
-                pokemon: null
+                pokemon: undefined
             };
         }
 
@@ -27,8 +25,7 @@ export function reducer(
                     weight: action.payload.weight,
                     name: action.payload.name,
                     sprites: {
-                        // tslint:disable-next-line: no-string-literal
-                        frontDefault: action.payload.sprites['front_default']
+                        frontDefault: action.payload.sprites.front_default
                     }
                 }
             };

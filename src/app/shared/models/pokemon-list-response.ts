@@ -1,7 +1,7 @@
-import { Pokemon } from './pokemon';
+import { PokemonResponse } from './pokemon-response';
 
 export interface PokemonListResponse {
-    results: Pokemon[];
+    results: PokemonResponse[];
     count: number;
     previous: string;
     next: string;

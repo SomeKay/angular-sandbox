@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pokemonDetails.PokemonDetailsRoutingModule should define the routes 1`] = `
+Array [
+  Object {
+    "component": [Function],
+    "path": ":name",
+  },
+]
+`;

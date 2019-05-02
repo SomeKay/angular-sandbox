@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Pokemon } from 'src/app/shared/models/pokemon';
 import { SharedStateService } from 'src/app/shared/state/services/shared-state.service';
+import { PokemonDetailsData } from '../../models/pokemon-details-data';
 import { PokemonDetailsStateService } from '../../state/services/pokemon-details-state.service';
 
 @Component({
@@ -22,9 +23,11 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscriptions.add(
-            this.pokemonDetailsStateService.getDataState().subscribe(data => {
-                this.pokemon = data.pokemon;
-            })
+            this.pokemonDetailsStateService
+                .getDataState()
+                .subscribe((data: PokemonDetailsData) => {
+                    this.pokemon = data.pokemon;
+                })
         );
 
         this.subscriptions.add(
@@ -38,7 +41,7 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     }
 
     fetchPokemonDetails() {
-        this.pokemonDetailsStateService.fetchPokemonDeatils(this.name);
+        this.pokemonDetailsStateService.fetchPokemonDetails(this.name);
     }
 
     ngOnDestroy() {

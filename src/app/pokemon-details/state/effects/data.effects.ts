@@ -17,7 +17,7 @@ export class DataEffects {
     constructor(private actions$: Actions, private apiService: ApiService) {}
 
     @Effect()
-    fetchPokemonList$: Observable<Action> = this.actions$.pipe(
+    fetchPokemonDetails$: Observable<Action> = this.actions$.pipe(
         ofType(DataActionTypes.FETCH_POKEMON_DETAILS),
         mergeMap((action: FetchPokemonDetails) =>
             this.apiService.getPokemonDetails(action.payload).pipe(

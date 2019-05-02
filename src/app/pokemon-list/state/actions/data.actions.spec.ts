@@ -21,12 +21,14 @@ describe('pokemonList.DataActionTypes', () => {
         const action: FetchPokemonListSuccess = new FetchPokemonListSuccess(
             pokemonListResponseMock
         );
+
         expect(action.type).toBe(DataActionTypes.FETCH_POKEMON_LIST_SUCCESS);
         expect(action.payload).toBe(pokemonListResponseMock);
     });
 
     it('should create FetchPokemonListError Action', () => {
         const action: FetchPokemonListError = new FetchPokemonListError();
+
         expect(action.type).toBe(DataActionTypes.FETCH_POKEMON_LIST_ERROR);
     });
 });
