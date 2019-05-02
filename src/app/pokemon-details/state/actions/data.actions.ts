@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PokemonResponse } from 'src/app/shared/models/pokemon-response';
+import { PokemonResponse } from 'src/app/shared/models/api/pokemon-response';
 
 export enum DataActionTypes {
     FETCH_POKEMON_DETAILS = '[DETAILS] Fetch Pokemon details',

@@ -1,8 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PokemonListResponse } from '../models/pokemon-list-response';
-import { PokemonResponse } from '../models/pokemon-response';
+import { PokemonListResponse } from '../models/api/pokemon-list-response';
+import { PokemonResponse } from '../models/api/pokemon-response';
 
 @Injectable()
 export class ApiService {

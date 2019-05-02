@@ -1,5 +1,8 @@
 import { PokemonSprites } from './pokemon-sprites';
 
 export const pokemonSpritesMock: PokemonSprites = {
-    frontDefault: 'frontDefaultFoo'
+    frontDefault: 'frontDefaultFoo',
+    backDefault: 'backDefaultFoo',
+    frontShiny: 'frontShinyFoo',
+    backShiny: 'backShinyFoo'
 };

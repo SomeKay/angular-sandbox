@@ -19,14 +19,40 @@ export function reducer(
         }
 
         case DataActionTypes.FETCH_POKEMON_DETAILS_SUCCESS: {
+            const p = action.payload;
+
             return {
                 pokemon: {
-                    id: action.payload.id,
-                    weight: action.payload.weight,
-                    name: action.payload.name,
+                    id: p.id,
+                    weight: p.weight,
+                    name: p.name,
+                    height: p.height,
+                    order: p.order,
+                    isDefault: p.is_default,
+                    baseExperience: p.base_experience,
                     sprites: {
-                        frontDefault: action.payload.sprites.front_default
-                    }
+                        frontDefault: p.sprites.front_default,
+                        backDefault: p.sprites.back_default,
+                        frontShiny: p.sprites.front_shiny,
+                        backShiny: p.sprites.back_shiny
+                    },
+                    abilities: p.abilities.map(a => ({
+                        name: a.ability.name,
+                        url: a.ability.url,
+                        slot: a.slot,
+                        isHidden: a.is_hidden
+                    })),
+                    types: p.types.map(t => ({
+                        name: t.type.name,
+                        url: t.type.url,
+                        slot: t.slot
+                    })),
+                    stats: p.stats.map(s => ({
+                        name: s.stat.name,
+                        url: s.stat.url,
+                        baseStat: s.base_stat,
+                        effort: s.effort
+                    }))
                 }
             };
         }

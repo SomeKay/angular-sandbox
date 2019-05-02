@@ -1,4 +1,4 @@
-import { pokemonResponseMock1 } from 'src/app/shared/models/pokemon-response.mock';
+import { pokemonResponseMock1 } from 'src/app/shared/models/api/pokemon-response.mock';
 import {
     DataActionTypes,
     FetchPokemonDetails,
