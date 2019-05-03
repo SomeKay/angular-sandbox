@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared.LoaderComponent on component init should have a working snapshot 1`] = `
+<pkmn-loader
+  loading={[Function Number]}
+  sharedStateService={[Function MockSharedStateService]}
+  subscriptions={[Function Subscription]}
+>
+  <div
+    class="pokeball"
+    id="normal"
+  />
+</pkmn-loader>
+`;
