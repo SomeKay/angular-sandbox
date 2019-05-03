@@ -1,14 +1,25 @@
 import { pokemonListResponseMock } from 'src/app/shared/models/api/pokemon-list-response.mock';
-import { FetchPokemonListSuccess } from '../actions/data.actions';
+import {
+    FetchPokemonList,
+    FetchPokemonListSuccess
+} from '../actions/data.actions';
 import * as dataReducers from './data.reducers';
 
 describe('pokemonList.DataReducers', () => {
     it('should have initial state', () => {
         expect(dataReducers.initialState).toEqual({
+            lastRequestUrl: '',
             pokemonList: [],
             nextUrl: '',
             previousUrl: ''
         });
+    });
+
+    it('should store the last request url', () => {
+        const action = new FetchPokemonList('foo');
+        const state = dataReducers.reducer(dataReducers.initialState, action);
+
+        expect(state.lastRequestUrl).toEqual('foo');
     });
 
     it('should store the pokemon list and fetch urls', () => {

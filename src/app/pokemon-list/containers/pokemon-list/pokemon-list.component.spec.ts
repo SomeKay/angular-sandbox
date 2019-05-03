@@ -1,7 +1,7 @@
 import { Injector } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of as observableOf, Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { SharedStateService } from 'src/app/shared/state/services/shared-state.service';
 import { MockSharedStateService } from 'src/app/shared/state/services/shared-state.service.mock';
 import { MockListPagingComponent } from '../../components/list-paging/list-paging.component.mock';
@@ -47,9 +47,7 @@ describe('pokemonList.PokemonListComponent', () => {
     describe('on component init', () => {
         beforeEach(() => {
             testee.fetchPokemonList = jest.fn();
-            pokemonListStateServiceMock.getDataState = jest.fn(() =>
-                observableOf()
-            );
+            pokemonListStateServiceMock.getDataState = jest.fn(() => of());
         });
 
         it('should have a working snapshot', () => {
@@ -57,16 +55,44 @@ describe('pokemonList.PokemonListComponent', () => {
             expect(fixture).toMatchSnapshot();
         });
 
-        it('should trigger pokemon list fetching', () => {
+        it('should trigger pokemon list fetching and loading if there are no pokemon in state', done => {
+            const subject = new Subject<any>();
+            pokemonListStateServiceMock.getDataState = () => subject;
+
             testee.ngOnInit();
 
-            expect(testee.fetchPokemonList).toHaveBeenCalled();
+            pokemonListStateServiceMock.getDataState().subscribe(() => {
+                expect(testee.fetchPokemonList).toHaveBeenCalledTimes(1);
+                expect(testee.fetchPokemonList).toHaveBeenCalledWith(
+                    pokemonListDataMock.lastRequestUrl
+                );
+                expect(sharedStateServiceMock.addLoading).toHaveBeenCalledTimes(
+                    1
+                );
+                done();
+            });
+
+            subject.next({
+                ...pokemonListDataMock,
+                pokemonList: []
+            });
         });
 
-        it('should increase the loading counter', () => {
+        it('should not trigger pokemon list fetching and loading if there are pokemon in state', done => {
+            const subject = new Subject<any>();
+            pokemonListStateServiceMock.getDataState = () => subject;
+
             testee.ngOnInit();
 
-            expect(sharedStateServiceMock.addLoading).toHaveBeenCalledTimes(1);
+            pokemonListStateServiceMock.getDataState().subscribe(() => {
+                expect(testee.fetchPokemonList).not.toHaveBeenCalled();
+                expect(
+                    sharedStateServiceMock.addLoading
+                ).not.toHaveBeenCalled();
+                done();
+            });
+
+            subject.next(pokemonListDataMock);
         });
 
         it('should subscribe to pokemon list data changes', done => {

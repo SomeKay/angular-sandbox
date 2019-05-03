@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { Pokemon } from 'src/app/shared/models/pokemon';
 import { SharedStateService } from 'src/app/shared/state/services/shared-state.service';
 import { PokemonListStateService } from '../../state/services/pokemon-list-state.service';
@@ -28,8 +29,15 @@ export class PokemonListComponent implements OnInit, OnDestroy {
             })
         );
 
-        this.fetchPokemonList();
-        this.sharedStateService.addLoading();
+        this.pokemonListStateService
+            .getDataState()
+            .pipe(first())
+            .subscribe(data => {
+                if (data.pokemonList.length === 0) {
+                    this.fetchPokemonList(data.lastRequestUrl);
+                    this.sharedStateService.addLoading();
+                }
+            });
     }
 
     fetchPokemonList(url?: string) {
