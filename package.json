@@ -6,7 +6,6 @@
         "start": "ng serve",
         "build": "ng build",
         "build:prod": "ng build --prod",
-        "build:prodGithub": "ng build --prod --base-href /angular-sandbox/",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:watchAll": "jest --watchAll",
