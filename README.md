@@ -2,12 +2,11 @@
 
 An Angular playground for exploring different Angular ideas.
 
-Built using the free [Pokemon API](https://pokeapi.co), it is deployed
-[here on GitHub Pages](https://poslek.com/angular-sandbox/) where you can try it
-out.
+Built using the free [Pokemon API](https://pokeapi.co), it is continuosly
+deployed [here to Netlify](https://pokemon.poslek.com) where you can try it out.
 
-Continuous integration (lint, test, build, deploy) status:
-[![CircleCI](https://circleci.com/gh/bojzi/angular-sandbox/tree/master.svg?style=svg)](https://circleci.com/gh/bojzi/angular-sandbox/tree/master)
+CI status:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1952423d-31a2-4bc4-8f7c-3c7a613474f2/deploy-status)](https://app.netlify.com/sites/upbeat-allen-8e03e1/deploys)
 
 ## Installing
 
