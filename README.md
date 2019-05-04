@@ -21,7 +21,7 @@ app will automatically reload if you change any of the source files.
 
 Run `npm run build` to build the project. The build artifacts will be stored in
 the `dist/` directory. Use the `npm run build:prod` script for a production
-build. Use the `npm run build:prodGithub` to build it for GitHub Pages.
+build.
 
 ## Pre-commit hooks
 
