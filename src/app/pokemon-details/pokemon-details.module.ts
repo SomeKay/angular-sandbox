@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { PokemonDetailsComponent } from './containers/pokemon-details/pokemon-details.component';
@@ -11,7 +11,7 @@ import { PokemonDetailsStateService } from './state/services/pokemon-details-sta
 @NgModule({
     declarations: [PokemonDetailsComponent],
     imports: [
-        BrowserModule,
+        CommonModule,
         StoreModule.forFeature('pokemonDetails', reducers),
         EffectsModule.forFeature([DataEffects]),
         PokemonDetailsRoutingModule

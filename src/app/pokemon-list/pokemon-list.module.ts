@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ListPagingComponent } from './components/list-paging/list-paging.component';
@@ -12,7 +12,7 @@ import { PokemonListStateService } from './state/services/pokemon-list-state.ser
 @NgModule({
     declarations: [PokemonListComponent, ListPagingComponent],
     imports: [
-        BrowserModule,
+        CommonModule,
         StoreModule.forFeature('pokemonList', reducers),
         EffectsModule.forFeature([DataEffects]),
         PokemonListRoutingModule
