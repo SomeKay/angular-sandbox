@@ -1,6 +1,7 @@
 import { Injector } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EMPTY, Subject } from 'rxjs';
+import { cold, Scheduler } from 'jest-marbles';
+import { EMPTY } from 'rxjs';
 import { SharedStateService } from 'src/app/shared/state/services/shared-state.service';
 import { MockSharedStateService } from 'src/app/shared/state/services/shared-state.service.mock';
 import { LoaderComponent } from './loader.component';
@@ -41,20 +42,18 @@ describe('shared.LoaderComponent', () => {
             expect(fixture).toMatchSnapshot();
         });
 
-        it('should subscribe to pokemon list data changes', done => {
-            const subject = new Subject<any>();
-            sharedStateServiceMock.getLayoutState = () => subject;
-            testee.ngOnInit();
+        it('should subscribe to pokemon list data changes', () => {
+            const loading$ = cold('--x', { x: { loading: 2 } });
+            sharedStateServiceMock.getLayoutState = jest
+                .fn()
+                .mockReturnValue(loading$);
 
             expect(testee.loading).toBeUndefined();
-            sharedStateServiceMock.getLayoutState().subscribe(() => {
-                expect(testee.loading).toEqual(2);
-                done();
-            });
 
-            subject.next({
-                loading: 2
-            });
+            testee.ngOnInit();
+            Scheduler.get().flush();
+
+            expect(testee.loading).toEqual(2);
         });
     });
 

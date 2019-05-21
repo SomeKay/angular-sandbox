@@ -1,17 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
-import { of, ReplaySubject, throwError as _throw } from 'rxjs';
+import { cold } from 'jest-marbles';
+import { Observable, of, throwError } from 'rxjs';
 import { PokemonResponse } from 'src/app/shared/models/api/pokemon-response';
 import { pokemonResponseMock1 } from 'src/app/shared/models/api/pokemon-response.mock';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MockApiService } from 'src/app/shared/services/api.service.mock';
+import { RemoveLoading } from 'src/app/shared/state/actions/layout.actions';
 import {
-    LayoutActionTypes,
-    RemoveLoading
-} from 'src/app/shared/state/actions/layout.actions';
-import {
-    DataActionTypes,
     FetchPokemonDetails,
     FetchPokemonDetailsError,
     FetchPokemonDetailsSuccess
@@ -20,94 +15,47 @@ import { DataEffects } from './data.effects';
 
 describe('pokemonDetails.DataEffects', () => {
     let testee: DataEffects;
-    let actions: ReplaySubject<any>;
     let apiServiceMock: ApiService;
-    let called = 0;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [],
-            providers: [
-                {
-                    provide: ApiService,
-                    useClass: MockApiService
-                },
-                DataEffects,
-                provideMockActions(() => actions)
-            ]
-        });
-
-        testee = TestBed.get(DataEffects);
-        apiServiceMock = TestBed.get(ApiService);
-        actions = new ReplaySubject(1);
-        called = 0;
+        apiServiceMock = new MockApiService();
     });
 
-    it('should handle the fetch pokemon details action', done => {
-        apiServiceMock.getPokemonDetails = jest.fn(() => {
-            const response = { body: pokemonResponseMock1 } as HttpResponse<
-                PokemonResponse
-            >;
-            return of(response);
+    it('should handle the fetch pokemon details action', () => {
+        const startAction = new FetchPokemonDetails('foo');
+        const endActionSuccess = new FetchPokemonDetailsSuccess(
+            pokemonResponseMock1
+        );
+        const endActionRemoveLoading = new RemoveLoading();
+
+        const actions = cold('--s', { s: startAction });
+        const expected = cold('--(ef)', {
+            e: endActionSuccess,
+            f: endActionRemoveLoading
         });
 
-        testee.fetchPokemonDetails$.subscribe(
-            (result: FetchPokemonDetailsSuccess | RemoveLoading) => {
-                if (result instanceof FetchPokemonDetailsSuccess) {
-                    expect(result.type).toEqual(
-                        DataActionTypes.FETCH_POKEMON_DETAILS_SUCCESS
-                    );
-                    expect(result.payload).toEqual(pokemonResponseMock1);
+        apiServiceMock.getPokemonDetails = (): Observable<
+            HttpResponse<PokemonResponse>
+        > => of({ body: pokemonResponseMock1 } as any);
 
-                    called += 1;
-                }
-
-                if (result instanceof RemoveLoading) {
-                    expect(result.type).toEqual(
-                        LayoutActionTypes.REMOVE_LOADING
-                    );
-
-                    called += 1;
-                }
-
-                if (called === 2) {
-                    done();
-                }
-            }
-        );
-
-        actions.next(new FetchPokemonDetails('foo'));
+        testee = new DataEffects(actions, apiServiceMock);
+        expect(testee.fetchPokemonDetails$).toBeObservable(expected);
     });
 
-    it('should handle the fetch pokemon details error case', done => {
-        apiServiceMock.getPokemonDetails = jest.fn(() => {
-            return _throw({ status: 500 });
+    it('should handle the fetch pokemon details error case', () => {
+        const startAction = new FetchPokemonDetails('foo');
+        const endActionError = new FetchPokemonDetailsError();
+        const endActionRemoveLoading = new RemoveLoading();
+
+        const actions = cold('--s', { s: startAction });
+        const expected = cold('--(ef)', {
+            e: endActionError,
+            f: endActionRemoveLoading
         });
 
-        testee.fetchPokemonDetails$.subscribe(
-            (result: FetchPokemonDetailsError | RemoveLoading) => {
-                if (result instanceof FetchPokemonDetailsError) {
-                    expect(result.type).toEqual(
-                        DataActionTypes.FETCH_POKEMON_DETAILS_ERROR
-                    );
+        apiServiceMock.getPokemonDetails = () => throwError(null);
 
-                    called += 1;
-                }
-
-                if (result instanceof RemoveLoading) {
-                    expect(result.type).toEqual(
-                        LayoutActionTypes.REMOVE_LOADING
-                    );
-
-                    called += 1;
-                }
-
-                if (called === 2) {
-                    done();
-                }
-            }
-        );
-
-        actions.next(new FetchPokemonDetails('foo'));
+        testee = new DataEffects(actions, apiServiceMock);
+        expect(testee.fetchPokemonDetails$).toBeObservable(expected);
     });
 });

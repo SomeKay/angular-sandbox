@@ -2,7 +2,8 @@ import { Injector } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, Subject } from 'rxjs';
+import { cold, Scheduler } from 'jest-marbles';
+import { of } from 'rxjs';
 import { SharedStateService } from 'src/app/shared/state/services/shared-state.service';
 import { MockSharedStateService } from 'src/app/shared/state/services/shared-state.service.mock';
 import { pokemonDetailsDataMock } from '../../models/pokemon-details-data.mock';
@@ -71,17 +72,19 @@ describe('pokemonDetails.PokemonDetailsComponent', () => {
             expect(fixture).toMatchSnapshot();
         });
 
-        it('should subscribe to pokemon details data changes', done => {
-            const subject = new Subject<any>();
-            pokemonDetailsStateServiceMock.getDataState = () => subject;
-            testee.ngOnInit();
-
-            pokemonDetailsStateServiceMock.getDataState().subscribe(() => {
-                expect(testee.pokemon).toEqual(pokemonDetailsDataMock.pokemon);
-                done();
+        it('should subscribe to pokemon details data changes', () => {
+            const pokemon$ = cold('--x', {
+                x: pokemonDetailsDataMock
             });
 
-            subject.next(pokemonDetailsDataMock);
+            pokemonDetailsStateServiceMock.getDataState = jest
+                .fn()
+                .mockReturnValue(pokemon$);
+
+            testee.ngOnInit();
+            Scheduler.get().flush();
+
+            expect(testee.pokemon).toEqual(pokemonDetailsDataMock.pokemon);
         });
 
         it('should handle route subscriptions', () => {

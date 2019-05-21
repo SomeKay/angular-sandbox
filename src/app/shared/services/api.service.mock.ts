@@ -1,4 +1,10 @@
-export class MockApiService {
-    getPokemonList = jest.fn();
-    getPokemonDetails = jest.fn();
+import { ApiService } from './api.service';
+
+export class MockApiService extends ApiService {
+    constructor() {
+        super({} as any);
+    }
+
+    public getPokemonList = jest.fn();
+    public getPokemonDetails = jest.fn();
 }
