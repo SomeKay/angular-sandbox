@@ -27,3 +27,12 @@ build.
 
 A set of scripts will run before each commit. You can test those hooks by
 running `npm run pre-commit`.
+
+## Running locally using Docker
+
+To run the production build of the application via Docker, do the following:
+
+Build the image: `docker build -t bojzi/angular-sandbox .`
+
+Spin up a container with the image:
+`docker run -p 8080:80 bojzi/angular-sandbox`
