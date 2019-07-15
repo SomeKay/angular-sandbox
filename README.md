@@ -30,7 +30,8 @@ running `npm run pre-commit`.
 
 ## Running locally using Docker
 
-To run the production build of the application via Docker, do the following:
+To run the production build of the application via Docker (available at
+`http://localhost:8080/`), do the following:
 
 Build the image: `docker build -t bojzi/angular-sandbox .`
 
